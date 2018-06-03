@@ -37,12 +37,12 @@ public class TestController {
 
     @ApiOperation(value = "测试apimodel", notes = "有问题")
 //    @ApiImplicitParams(value = {
-//            @ApiImplicitParam(name = "user", value = "地址",
-//                    dataType = "User", required = true
+//            @ApiImplicitParam(name = "user", value = "user"
+//                    dataType = "user", required = true, paramType = "body"
 //            )
 //    })
     @RequestMapping(value = "/connect/address", method = RequestMethod.POST, consumes = "application/json")
-    public Account address(@RequestBody User user){
+    public Account address(@RequestBody @ApiParam(name = " 名字", value = "zhi",required = true) User user){
         Account ds = new Account();
         ds.setAddress("fskjdhkajhda");
         return ds;
