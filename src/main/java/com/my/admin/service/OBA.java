@@ -10,7 +10,7 @@ public class OBA {
 
     private UserService userService;
 
-    @Autowired(required = false)
+    @Autowired
     public OBA(UserService userService) {
         Assert.notNull(userService, "userService must not be null");
         this.userService = userService;
