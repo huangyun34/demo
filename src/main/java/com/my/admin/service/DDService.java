@@ -9,6 +9,7 @@ import java.util.Date;
 public class DDService {
 
     @Async
+    @Deprecated
     public void async(){
         try {
             Thread.sleep(5000);
@@ -28,6 +29,7 @@ public class DDService {
         System.out.println("方法完成" + new Date());
     }
 
+    @Deprecated
     public void dd(){
 
     }
