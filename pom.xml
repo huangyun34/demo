@@ -95,6 +95,12 @@
             <version>2.2.13</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.github.ealenxie</groupId>
+            <artifactId>aop-log</artifactId>
+            <version>2.1</version>
+        </dependency>
+
         <!--<dependency>-->
             <!--<groupId>com.github.shyiko</groupId>-->
             <!--<artifactId>mysql-binlog-connector-java</artifactId>-->

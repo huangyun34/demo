@@ -1,7 +1,9 @@
 package com.my.admin.controller;
 
+import com.github.AopLog;
 import com.my.admin.model.Account;
 import com.my.admin.model.User;
+import com.my.admin.service.AccountService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -13,16 +15,23 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("/test")
 @Api(value = "tttttttttest")
+@AopLog(type = "test", stackTraceOnErr = true)
 public class TestController {
 
     @Autowired
     private RedisTemplate redisTemplate;
 
+    @Autowired
+    private AccountService accountService;
+
     @ApiResponse(code = 1, message = "{hello:hello}")
     @RequestMapping(value = "/connect", method = RequestMethod.GET)
     public String connect(HttpServletRequest request){
+        accountService.a();
         return "hhhh";
     }
+
+
 
     @RequestMapping(value = "/connect/redis", method = RequestMethod.GET)
     public String connectRedis(){
