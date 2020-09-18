@@ -1,6 +1,7 @@
 package com.my.admin.controller;
 
 import com.github.AopLog;
+import com.my.admin.distributionLock.redis.RedisLock;
 import com.my.admin.model.Account;
 import com.my.admin.model.User;
 import com.my.admin.service.AccountService;
@@ -24,6 +25,9 @@ public class TestController {
     @Autowired
     private AccountService accountService;
 
+    @Autowired
+    private RedisLock redisLock;
+
     @ApiResponse(code = 1, message = "{hello:hello}")
     @RequestMapping(value = "/connect", method = RequestMethod.GET)
     public String connect(HttpServletRequest request){
@@ -31,7 +35,39 @@ public class TestController {
         return "hhhh";
     }
 
+    @RequestMapping(value = "/reentrantLock", method = RequestMethod.GET)
+    public void reentrantLock(){
+        new Thread(() -> {
+            boolean ok = redisLock.reentrantLock("a");
+            boolean ok1 = redisLock.reentrantLock("a");
+            System.out.println("1" + ok);
+            System.out.println("2" + ok1);
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            redisLock.reentrantUnlock("a");
+            redisLock.reentrantUnlock("a");
+            System.out.println("解锁");
 
+        }).start();
+
+        new Thread(() -> {
+            for (int i = 0; i < 2; i ++) {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                boolean ok = redisLock.reentrantLock("a");
+                boolean ok1 = redisLock.reentrantLock("a");
+                System.out.println("3" + ok);
+                System.out.println("4" + ok1);
+
+            }
+        }).start();
+    }
 
     @RequestMapping(value = "/connect/redis", method = RequestMethod.GET)
     public String connectRedis(){

@@ -3,12 +3,19 @@ package com.my.admin.config.redis;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+import redis.clients.jedis.JedisCluster;
+import redis.clients.jedis.JedisCommands;
+import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPoolConfig;
+
+import java.lang.reflect.Proxy;
 
 @Configuration
 public class RedisConfig {
@@ -37,5 +44,20 @@ public class RedisConfig {
         redisTemplate.setValueSerializer(jackson2JsonRedisSerializer);
         redisTemplate.afterPropertiesSet();
         return redisTemplate;
+    }
+
+    @Bean
+    public JedisPool jedisPool(@Autowired RedisProperties redisProperties) {
+        JedisPoolConfig config = new JedisPoolConfig();
+        config.setMaxIdle(100);
+        config.setMinIdle(50);
+        config.setMaxTotal(5000);
+        return new JedisPool(config, redisProperties.getHost(), redisProperties.getPort(), 2000);
+    }
+
+    @Bean
+    public JedisCommands jedisCommands(JedisPool jedisPool) {
+        JedisPoolProxy proxy = new JedisPoolProxy(jedisPool);
+        return (JedisCommands)Proxy.newProxyInstance(proxy.getClass().getClassLoader(), new Class[]{JedisCommands.class}, proxy);
     }
 }

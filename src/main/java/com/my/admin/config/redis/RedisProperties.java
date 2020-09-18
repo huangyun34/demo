@@ -14,6 +14,7 @@ public class RedisProperties {
     private Integer maxIdle;
     private Integer minIdle;
     private Integer timeOut;
+    private Integer database;
 
     public String getHost() {
         return host;
@@ -77,5 +78,13 @@ public class RedisProperties {
 
     public void setTimeOut(Integer timeOut) {
         this.timeOut = timeOut;
+    }
+
+    public Integer getDatabase() {
+        return database;
+    }
+
+    public void setDatabase(Integer database) {
+        this.database = database;
     }
 }
