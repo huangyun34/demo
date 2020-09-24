@@ -41,46 +41,56 @@ public class CanalClient {
             canalConnector.connect();
             canalConnector.subscribe(tableFilter);
             while (true) {
-                Message message = canalConnector.get(batchSize, 1l, TimeUnit.SECONDS);
-                if (!CollectionUtils.isEmpty(message.getEntries())) {
-                    for (CanalEntry.Entry entry : message.getEntries()) {
-                        if (entry.getEntryType().equals(CanalEntry.EntryType.ROWDATA)) {
-                            String tableName = entry.getHeader().getTableName();
-                            CanalEntry.RowChange rowChange = CanalEntry.RowChange.parseFrom(entry.getStoreValue());
-                            if (rowChange.getEventType().equals(CanalEntry.EventType.INSERT)) {
-                                List<CanalEntry.RowData> rowDataList = rowChange.getRowDatasList();
-                                for (CanalEntry.RowData rowData : rowDataList) {
-                                    List<CanalEntry.Column> columns = rowData.getAfterColumnsList();
-                                    for (CanalEntry.Column column : columns) {
-                                        if (column.getIsKey()) {
-                                            System.out.println(tableName + "表新增id" + column.getValue());
+                long batchId = -1;
+                try {
+                    Message message = canalConnector.getWithoutAck(batchSize);
+                    batchId = message.getId();
+                    int size = message.getEntries().size();
+                    if (batchId == -1 || size == 0) {
+                        continue;
+                    }
+                    if (!CollectionUtils.isEmpty(message.getEntries())) {
+                        for (CanalEntry.Entry entry : message.getEntries()) {
+                            if (entry.getEntryType().equals(CanalEntry.EntryType.ROWDATA)) {
+                                String tableName = entry.getHeader().getTableName();
+                                CanalEntry.RowChange rowChange = CanalEntry.RowChange.parseFrom(entry.getStoreValue());
+                                if (rowChange.getEventType().equals(CanalEntry.EventType.INSERT)) {
+                                    List<CanalEntry.RowData> rowDataList = rowChange.getRowDatasList();
+                                    for (CanalEntry.RowData rowData : rowDataList) {
+                                        List<CanalEntry.Column> columns = rowData.getAfterColumnsList();
+                                        for (CanalEntry.Column column : columns) {
+                                            if (column.getIsKey()) {
+                                                System.out.println(tableName + "表新增id" + column.getValue());
+                                            }
                                         }
                                     }
-                                }
-                            } else if (rowChange.getEventType().equals(CanalEntry.EventType.UPDATE)) {
-                                List<CanalEntry.RowData> rowDataList = rowChange.getRowDatasList();
-                                for (CanalEntry.RowData rowData : rowDataList) {
-                                    List<CanalEntry.Column> columns = rowData.getAfterColumnsList();
-                                    for (CanalEntry.Column column : columns) {
-                                        if (column.getIsKey()) {
-                                            System.out.println(tableName + "表更新id" + column.getValue());
+                                } else if (rowChange.getEventType().equals(CanalEntry.EventType.UPDATE)) {
+                                    List<CanalEntry.RowData> rowDataList = rowChange.getRowDatasList();
+                                    for (CanalEntry.RowData rowData : rowDataList) {
+                                        List<CanalEntry.Column> columns = rowData.getAfterColumnsList();
+                                        for (CanalEntry.Column column : columns) {
+                                            if (column.getIsKey()) {
+                                                System.out.println(tableName + "表更新id" + column.getValue());
+                                            }
                                         }
                                     }
-                                }
-                            } else if (rowChange.getEventType().equals(CanalEntry.EventType.DELETE)) {
-                                List<CanalEntry.RowData> rowDataList = rowChange.getRowDatasList();
-                                for (CanalEntry.RowData rowData : rowDataList) {
-                                    List<CanalEntry.Column> columns = rowData.getBeforeColumnsList();
-                                    for (CanalEntry.Column column : columns) {
-                                        if (column.getIsKey()) {
-                                            System.out.println(tableName + "删除id" + column.getValue());
+                                } else if (rowChange.getEventType().equals(CanalEntry.EventType.DELETE)) {
+                                    List<CanalEntry.RowData> rowDataList = rowChange.getRowDatasList();
+                                    for (CanalEntry.RowData rowData : rowDataList) {
+                                        List<CanalEntry.Column> columns = rowData.getBeforeColumnsList();
+                                        for (CanalEntry.Column column : columns) {
+                                            if (column.getIsKey()) {
+                                                System.out.println(tableName + "删除id" + column.getValue());
+                                            }
                                         }
                                     }
                                 }
                             }
-                        }
 //                        LOGGER.info(entry.toString());
+                        }
                     }
+                } finally {
+                    canalConnector.ack(batchId);
                 }
             }
         } catch (Exception e) {

@@ -74,7 +74,7 @@ logging:
 canal:
   username: canal
   password: canal
-  cluster: true
+  cluster: false
   destination: mty
   table_filter: mty.account
 

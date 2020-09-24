@@ -3,6 +3,7 @@ package com.my.admin.searchEngine.canal;
 import com.alibaba.otter.canal.client.CanalConnector;
 import com.alibaba.otter.canal.client.CanalConnectors;
 import com.alibaba.otter.canal.client.impl.ClusterCanalConnector;
+import com.alibaba.otter.canal.common.utils.AddressUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,6 +14,7 @@ import java.net.InetSocketAddress;
 
 /**
  * 配置canal详解，请参考：https://github.com/alibaba/canal/wiki/QuickStart
+ * 注意zookeeper创建节点问题，由于
  */
 @Configuration
 public class CanalConfig {
@@ -38,7 +40,7 @@ public class CanalConfig {
         if (cluster) {
             canalConnector = CanalConnectors.newClusterConnector(server, destination, username, password);
         } else {
-            canalConnector = CanalConnectors.newSingleConnector(new InetSocketAddress(server.split(":")[0], Integer.parseInt(server.split(":")[1])), destination, username, password);
+            canalConnector = CanalConnectors.newSingleConnector(new InetSocketAddress(AddressUtils.getHostIp(), 11111), destination, username, password);
         }
         return canalConnector;
     }
