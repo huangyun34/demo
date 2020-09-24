@@ -70,4 +70,16 @@ logging:
 #    git:
 #      mode: full
 
+#canal config
+canal:
+  username: canal
+  password: canal
+  cluster: true
+  destination: mty
+  table_filter: mty.account
+
+#Zookeeper config
+zookeeper:
+  server: 127.0.0.1:2181
+
 
