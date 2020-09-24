@@ -14,7 +14,7 @@ import java.net.InetSocketAddress;
 
 /**
  * 配置canal详解，请参考：https://github.com/alibaba/canal/wiki/QuickStart
- * 注意zookeeper创建节点问题，由于
+ * 单点模式地址是canal地址，而集群模式是zookeeper地址
  */
 @Configuration
 public class CanalConfig {
