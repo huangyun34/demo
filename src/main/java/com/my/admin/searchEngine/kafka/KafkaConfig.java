@@ -81,7 +81,7 @@ public class KafkaConfig {
      */
     public Map<String, Object> consumerMap() {
         Map<String, Object> map = new HashMap<>();
-        map.put(ConsumerConfig.GROUP_ID_CONFIG, "group");
+//        map.put(ConsumerConfig.GROUP_ID_CONFIG, "group");
         map.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, "1000");
         map.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9092");
         map.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, "40000");

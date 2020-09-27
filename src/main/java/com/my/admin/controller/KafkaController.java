@@ -21,6 +21,7 @@ public class KafkaController {
     @RequestMapping(value = "/send", method = RequestMethod.POST)
     public String sendKafka(@RequestParam("value") String value){
         kafkaProducer.send(value);
+        kafkaProducer.send1(value);
         return "ok";
     }
 }

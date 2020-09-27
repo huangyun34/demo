@@ -23,4 +23,14 @@ public class KafkaProducer {
         kafkaTemplate.send("abc", message);
         kafkaTemplate.flush();
     }
+
+    /**
+     * 向kafka发送消息
+     * @param message
+     */
+    public void send1(String message) {
+        LOGGER.info("往topic:def发送消息{}", message);
+        kafkaTemplate.send("def", message);
+        kafkaTemplate.flush();
+    }
 }
