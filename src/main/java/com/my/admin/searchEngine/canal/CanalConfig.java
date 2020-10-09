@@ -16,7 +16,7 @@ import java.net.InetSocketAddress;
  * 配置canal详解，请参考：https://github.com/alibaba/canal/wiki/QuickStart
  * 单点模式地址是canal地址，而集群模式是zookeeper地址
  */
-@Configuration
+//@Configuration
 public class CanalConfig {
     private static final Logger LOG = LoggerFactory.getLogger(CanalConfig.class);
 

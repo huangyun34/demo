@@ -1,5 +1,6 @@
 package com.my.admin;
 
+import de.codecentric.boot.admin.server.config.EnableAdminServer;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
@@ -16,6 +17,8 @@ import java.util.LinkedHashSet;
 //@SpringBootApplication
 @EnableRabbit
 @ComponentScan("com.my")
+//监控
+@EnableAdminServer
 @EnableAsync
 public class AdminApplication {
     public static void main(String[] args){

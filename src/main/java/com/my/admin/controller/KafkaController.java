@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @AopLog(type = "kafka", stackTraceOnErr = true)
 public class KafkaController {
 
-    @Autowired
+//    @Autowired
     private KafkaProducer kafkaProducer;
 
     /**

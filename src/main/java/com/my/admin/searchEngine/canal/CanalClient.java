@@ -16,7 +16,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-@Component
+//@Component
 public class CanalClient {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CanalClient.class);

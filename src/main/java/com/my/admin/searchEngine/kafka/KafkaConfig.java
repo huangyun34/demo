@@ -53,8 +53,8 @@ import java.util.Map;
  * 查看top信息命令
  * ./kafka-topics.sh --zookeeper localhost:2181 --describe --topic abc
  */
-@Configuration
-@EnableKafka
+//@Configuration
+//@EnableKafka
 public class KafkaConfig {
 
     /**

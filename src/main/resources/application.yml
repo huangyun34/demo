@@ -58,6 +58,9 @@ account:
 logging:
   level:
     com.my: debug
+    org:
+      springframework:
+        security: DEBUG
 
 
 #spring boot actuator config
@@ -83,3 +86,8 @@ zookeeper:
   server: 127.0.0.1:2181
 
 
+eureka:
+  instance:
+    metadata-map:
+      user.name: ${spring.security.user.name}
+      user.password: ${spring.security.user.password}

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  * 2：消费者数量<partition（不重复）数量，有部分partition没有消费者，里面的数据不会消费
  * 但是一个消费者可以消费多个topic下的多个partition
  */
-@Component
+//@Component
 public class KafkaConsumer {
 
     /**
