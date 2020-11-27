@@ -11,6 +11,8 @@
     <modules>
         <module>my-bio</module>
         <module>rpc-client</module>
+        <module>register-center</module>
+        <module>rpc-server</module>
     </modules>
 
     <properties>

@@ -31,7 +31,7 @@ public class RpcClientFrame {
 
         /*拿到一个代理对象，由这个代理对象通过网络进行实际的服务调用*/
         return (T)Proxy.newProxyInstance(serviceInterface.getClassLoader(),
-                serviceInterface.getClasses(),
+                new Class<?>[]{serviceInterface},
                 new DynProxy(serviceInterface, inetSocketAddress));
     }
 
@@ -110,7 +110,7 @@ public class RpcClientFrame {
             socket = new Socket();
 
             //注册中心地址
-            socket.connect(new InetSocketAddress("127.0.0.1", 9999));
+            socket.connect(new InetSocketAddress("127.0.0.1", 9998));
 
             objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
 
@@ -133,13 +133,13 @@ public class RpcClientFrame {
             return services;
         } finally {
             if (socket != null) {
-                socket = null;
+                socket.close();
             }
             if (objectInputStream != null) {
-                objectInputStream = null;
+                objectInputStream.close();
             }
             if (objectOutputStream != null) {
-                objectOutputStream = null;
+                objectOutputStream.close();
             }
         }
     }
