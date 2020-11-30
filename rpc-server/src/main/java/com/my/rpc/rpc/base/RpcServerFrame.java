@@ -54,7 +54,9 @@ public class RpcServerFrame {
 
                 /*通过反射，执行实际的服务*/
                 Method method = impl.getMethod(methodName, paramTypes);
-                Object result = method.invoke(args);
+
+                //注意newInstance初始化个实例
+                Object result = method.invoke(impl.newInstance(), args);
 
                 /*将服务的执行结果通知调用者*/
                 outputStream.writeObject(result);
@@ -88,7 +90,8 @@ public class RpcServerFrame {
         registerServiceWithRegCenter.regRemote(serviceName, host, port, impl);
         try {
             while (true) {
-                new Thread(new ServerTask(serverSocket.accept(), registerServiceWithRegCenter));
+                //线程不要忘了启动
+                new Thread(new ServerTask(serverSocket.accept(), registerServiceWithRegCenter)).start();
             }
         } finally {
             serverSocket.close();

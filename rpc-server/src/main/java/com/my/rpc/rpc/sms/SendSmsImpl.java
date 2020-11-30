@@ -2,8 +2,11 @@ package com.my.rpc.rpc.sms;
 
 import com.my.rpc.remote.SendSms;
 import com.my.rpc.remote.vo.UserInfo;
+import org.springframework.stereotype.Service;
 
+@Service
 public class SendSmsImpl implements SendSms {
+
     @Override
     public boolean send(UserInfo userInfo) {
         try {

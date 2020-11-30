@@ -50,41 +50,72 @@ public class RpcClientFrame {
         @Override
         public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
             Socket socket = null;
-            ObjectInputStream objectInputStream = null;
-            ObjectOutputStream objectOutputStream = null;
-            try {
+            ObjectInputStream inputStream = null;
+            ObjectOutputStream outputStream = null;
+            try{
                 socket = new Socket();
                 socket.connect(inetSocketAddress);
-                objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+                outputStream = new ObjectOutputStream(socket.getOutputStream());
 
-                //方法所在类名接口名称
-                objectOutputStream.writeUTF(serviceInterface.getName());
-
-                //方法名
-                objectOutputStream.writeUTF(method.getName());
-
+                //方法所在类名接口名
+                outputStream.writeUTF(serviceInterface.getName());
+                //方法的名字
+                outputStream.writeUTF(method.getName());
                 //方法的入参类型
-                objectOutputStream.writeObject(method.getTypeParameters());
-
+                outputStream.writeObject(method.getParameterTypes());
                 //方法入参的值
-                objectOutputStream.writeObject(args);
+                outputStream.writeObject(args);
 
-                objectOutputStream.flush();
+                outputStream.flush();
 
-                objectInputStream = new ObjectInputStream(socket.getInputStream());
-                System.out.println(serviceInterface + " remote exec success!");
-                return objectInputStream.readObject();
-            } finally {
-                if (socket != null) {
-                    socket.close();
-                }
-                if (objectInputStream != null) {
-                    objectInputStream.close();
-                }
-                if (objectOutputStream != null) {
-                    objectOutputStream.close();
-                }
+                inputStream = new ObjectInputStream(socket.getInputStream());
+                /*接受服务器的输出*/
+                System.out.println(serviceInterface+" remote exec success!");
+                return inputStream.readObject();
+
+            }finally {
+                if(socket!=null) socket.close();
+                if(outputStream!=null) outputStream.close();
+                if(inputStream!=null) inputStream.close();
+
             }
+            //            Socket socket = null;
+//            ObjectInputStream objectInputStream = null;
+//            ObjectOutputStream objectOutputStream = null;
+//            try {
+//                socket = new Socket();
+//                socket.connect(inetSocketAddress);
+//                objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+//
+//                //方法所在类名接口名称
+//                objectOutputStream.writeUTF(serviceInterface.getName());
+//
+//                //方法名
+//                objectOutputStream.writeUTF(method.getName());
+//
+//                //方法的入参类型
+//                objectOutputStream.writeObject(method.getTypeParameters());
+//
+//                //方法入参的值
+//                objectOutputStream.writeObject(args);
+//
+//                objectOutputStream.flush();
+//
+//                objectInputStream = new ObjectInputStream(socket.getInputStream());
+//                System.out.println(serviceInterface + " remote exec success!");
+//                return objectInputStream.readObject();
+//            } finally {
+//                if (socket != null) {
+//                    socket.close();
+//                }
+//                if (objectInputStream != null) {
+//                    objectInputStream.close();
+//                }
+//                if (objectOutputStream != null) {
+//                    objectOutputStream.close();
+//                }
+//            }
+//            return null;
         }
     }
 
