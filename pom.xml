@@ -13,6 +13,7 @@
         <module>rpc-client</module>
         <module>register-center</module>
         <module>rpc-server</module>
+        <module>nio</module>
     </modules>
 
     <properties>
