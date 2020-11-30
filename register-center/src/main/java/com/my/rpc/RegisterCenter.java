@@ -104,7 +104,7 @@ public class RegisterCenter {
         System.out.println("服务注册中心 on:"+PORT+":运行");
         try {
             while (true) {
-//                new Thread(new ServerTask(serverSocket.accept())).start();
+                new Thread(new ServerTask(serverSocket.accept())).start();
             }
         } catch (Exception e) {
             e.printStackTrace();
