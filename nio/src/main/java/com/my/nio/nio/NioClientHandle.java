@@ -38,7 +38,7 @@ public class NioClientHandle implements Runnable {
             //TODO 要链接成功后，才把通道设置问非阻塞，不然回连接不上
             /*设置通道为非阻塞模式*/
             socketChannel.configureBlocking(false);
-            socketChannel.register(selector, SelectionKey.OP_READ | SelectionKey.OP_WRITE);
+            socketChannel.register(selector, SelectionKey.OP_READ);
             /*设置好后，状态置为启动状态*/
             started = true;
         } catch (IOException e) {
