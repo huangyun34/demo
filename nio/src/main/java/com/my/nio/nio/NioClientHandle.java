@@ -33,12 +33,12 @@ public class NioClientHandle implements Runnable {
             selector = Selector.open();
             /*创建SocketChannel的实例*/
             socketChannel = SocketChannel.open();
-            //链接
-            socketChannel.connect(new InetSocketAddress(host, port));
+//            //链接
+//            socketChannel.connect(new InetSocketAddress(host, port));
             //TODO 要链接成功后，才把通道设置问非阻塞，不然回连接不上
-            /*设置通道为非阻塞模式*/
-            socketChannel.configureBlocking(false);
-            socketChannel.register(selector, SelectionKey.OP_READ);
+//            /*设置通道为非阻塞模式*/
+//            socketChannel.configureBlocking(false);
+//            socketChannel.register(selector, SelectionKey.OP_READ);
             /*设置好后，状态置为启动状态*/
             started = true;
         } catch (IOException e) {
@@ -54,11 +54,11 @@ public class NioClientHandle implements Runnable {
 
     @Override
     public void run() {
-//        try {
-//            doConnect();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            doConnect();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         //循环遍历selector
         while (started) {
             try {
@@ -104,6 +104,8 @@ public class NioClientHandle implements Runnable {
     private void doConnect() throws IOException {
         /*非阻塞的连接*/
         if (socketChannel.connect(new InetSocketAddress(host, port))) {
+            /*设置通道为非阻塞模式*/
+            socketChannel.configureBlocking(false);
             socketChannel.register(selector, SelectionKey.OP_READ);
         } else {
             socketChannel.register(selector, SelectionKey.OP_CONNECT);
