@@ -17,7 +17,7 @@ import org.springframework.core.PriorityOrdered;
  * spring启动时，在初始化bean之前所做的事情
  */
 @Configuration
-public class BeanPro implements BeanDefinitionRegistryPostProcessor, PriorityOrdered {
+public class BeanPro implements BeanDefinitionRegistryPostProcessor {
     @Override
     public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry beanDefinitionRegistry) throws BeansException {
         /*实现BeanDefinition实例化之前对BeanDefinition的删除操作*/
@@ -40,10 +40,5 @@ public class BeanPro implements BeanDefinitionRegistryPostProcessor, PriorityOrd
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory configurableListableBeanFactory) throws BeansException {
         System.out.println("多少个："+configurableListableBeanFactory.getBeanDefinitionCount());
-    }
-
-    @Override
-    public int getOrder() {
-        return Ordered.HIGHEST_PRECEDENCE;
     }
 }
