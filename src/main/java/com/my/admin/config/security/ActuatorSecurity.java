@@ -23,8 +23,8 @@ import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-@Configuration
-public class ActuatorSecurity extends WebSecurityConfigurerAdapter {
+//@Configuration
+public class ActuatorSecurity /*extends WebSecurityConfigurerAdapter*/ {
 
 //    private final AdminServerProperties adminServer;
 //
@@ -32,62 +32,62 @@ public class ActuatorSecurity extends WebSecurityConfigurerAdapter {
 //        this.adminServer = adminServer;
 //    }
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.formLogin()                    //  定义当需要用户登录时候，转到的登录页面。
-                .and()
-                .authorizeRequests()        // 定义哪些URL需要被保护、哪些不需要被保护
-                .anyRequest()               // 任何请求,登录后可以访问
-                .authenticated();
-//        http
-//                .authorizeRequests()
-//                .antMatchers("/", "/home").permitAll()
-//                .antMatchers("/login").permitAll()
-//                .anyRequest()
-//                .authenticated()
-//                .and()
-//                .formLogin()
-//                .loginPage("/login")
-//                .permitAll()
-//                .and()
-//                .logout()
-//                .permitAll();
-    }
-
-    //代表所有权限
 //    @Override
 //    protected void configure(HttpSecurity http) throws Exception {
-//        http.authorizeRequests().anyRequest().permitAll()
-//                .and().csrf().disable();
-//    }
-
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http.userDetailsService(userDetailsService())
-//                .requestMatcher(EndpointRequest.toAnyEndpoint())
-//                .authorizeRequests()
-//                .anyRequest().hasRole("ADMIN")
+//        http.formLogin()                    //  定义当需要用户登录时候，转到的登录页面。
 //                .and()
-//                .httpBasic();
+//                .authorizeRequests()        // 定义哪些URL需要被保护、哪些不需要被保护
+//                .anyRequest()               // 任何请求,登录后可以访问
+//                .authenticated();
+////        http
+////                .authorizeRequests()
+////                .antMatchers("/", "/home").permitAll()
+////                .antMatchers("/login").permitAll()
+////                .anyRequest()
+////                .authenticated()
+////                .and()
+////                .formLogin()
+////                .loginPage("/login")
+////                .permitAll()
+////                .and()
+////                .logout()
+////                .permitAll();
 //    }
-
-    @Bean
-    @Override
-    protected UserDetailsService userDetailsService() {
-//        UserDetails uu = new User("huangyun", "123456", Arrays.asList(new SimpleGrantedAuthority("ADMIN")));
+//
+//    //代表所有权限
+////    @Override
+////    protected void configure(HttpSecurity http) throws Exception {
+////        http.authorizeRequests().anyRequest().permitAll()
+////                .and().csrf().disable();
+////    }
+//
+////    @Override
+////    protected void configure(HttpSecurity http) throws Exception {
+////        http.userDetailsService(userDetailsService())
+////                .requestMatcher(EndpointRequest.toAnyEndpoint())
+////                .authorizeRequests()
+////                .anyRequest().hasRole("ADMIN")
+////                .and()
+////                .httpBasic();
+////    }
+//
+//    @Bean
+//    @Override
+//    protected UserDetailsService userDetailsService() {
+////        UserDetails uu = new User("huangyun", "123456", Arrays.asList(new SimpleGrantedAuthority("ADMIN")));
+////        UserDetails user =
+////                User.withUsername("huangyun")
+////                        .password("123456")
+////                        .passwordEncoder(passwordEncoder())
+////                        .roles("ADMIN")
+////                        .build();
 //        UserDetails user =
-//                User.withUsername("huangyun")
-//                        .password("123456")
-//                        .passwordEncoder(passwordEncoder())
+//                User.withDefaultPasswordEncoder()
+//                        .username("admin")
+//                        .password("admin")
 //                        .roles("ADMIN")
 //                        .build();
-        UserDetails user =
-                User.withDefaultPasswordEncoder()
-                        .username("admin")
-                        .password("admin")
-                        .roles("ADMIN")
-                        .build();
-        return new InMemoryUserDetailsManager(user);
-    }
+//        return new InMemoryUserDetailsManager(user);
+//    }
 
 }
