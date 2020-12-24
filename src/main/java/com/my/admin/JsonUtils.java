@@ -2,6 +2,7 @@ package com.my.admin;
 
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -75,4 +76,9 @@ public class JsonUtils {
         return mapper.convertValue(from, cls);
     }
 
+    public static void main(String[] args) {
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
+        InsertBean ds = (InsertBean)context.getBean("insertBean");
+        System.out.println(ds);
+    }
 }
