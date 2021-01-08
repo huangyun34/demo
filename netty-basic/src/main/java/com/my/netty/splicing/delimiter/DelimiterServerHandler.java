@@ -11,6 +11,10 @@ import io.netty.util.CharsetUtil;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * 类说明：自己的业务处理
+ * @author huangyun
+ */
 @ChannelHandler.Sharable
 public class DelimiterServerHandler extends SimpleChannelInboundHandler<ByteBuf> {
 

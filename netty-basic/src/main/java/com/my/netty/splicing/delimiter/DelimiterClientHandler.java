@@ -9,6 +9,10 @@ import io.netty.util.CharsetUtil;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * 类说明：自己的业务处理
+ * @author huangyun
+ */
 public class DelimiterClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
 
     private AtomicInteger counter = new AtomicInteger(0);
