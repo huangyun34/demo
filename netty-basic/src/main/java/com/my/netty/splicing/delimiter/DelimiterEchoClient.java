@@ -15,7 +15,7 @@ import io.netty.handler.codec.DelimiterBasedFrameDecoder;
 import java.net.InetSocketAddress;
 
 /**
- * 半包粘包问题解决：包尾部增加分隔符
+ * 半包粘包问题解决：包尾部增加自定义分隔符
  * @author huangyun
  */
 public class DelimiterEchoClient {

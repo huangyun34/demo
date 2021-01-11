@@ -12,6 +12,10 @@ import io.netty.handler.codec.LineBasedFrameDecoder;
 
 import java.net.InetSocketAddress;
 
+/**
+ * 半包粘包问题解决：换行符
+ * @author huangyun
+ */
 public class LineBaseClient {
 
     public static void main(String[] args) throws InterruptedException {
