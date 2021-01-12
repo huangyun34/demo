@@ -15,6 +15,7 @@
         <module>rpc-server</module>
         <module>nio</module>
         <module>netty-basic</module>
+        <module>my-proxy</module>
     </modules>
 
     <properties>
