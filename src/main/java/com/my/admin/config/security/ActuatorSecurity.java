@@ -1,27 +1,27 @@
 package com.my.admin.config.security;
 
-import com.my.admin.NotificationListener;
-import de.codecentric.boot.admin.server.config.AdminServerProperties;
-import io.netty.handler.codec.http.HttpMethod;
-import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-//import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-//import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-
-import java.util.*;
-import java.util.function.Consumer;
-import java.util.function.Function;
+//import com.my.admin.NotificationListener;
+//import de.codecentric.boot.admin.server.config.AdminServerProperties;
+//import io.netty.handler.codec.http.HttpMethod;
+//import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
+//import org.springframework.context.annotation.Bean;
+//import org.springframework.context.annotation.Configuration;
+//import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+//import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+////import org.springframework.security.core.authority.SimpleGrantedAuthority;
+//import org.springframework.security.core.userdetails.User;
+//import org.springframework.security.core.userdetails.UserDetails;
+//import org.springframework.security.core.userdetails.UserDetailsService;
+////import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+////import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+//import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+//import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+//import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+//
+//import java.util.*;
+//import java.util.function.Consumer;
+//import java.util.function.Function;
 
 //@Configuration
 public class ActuatorSecurity /*extends WebSecurityConfigurerAdapter*/ {

@@ -18,7 +18,7 @@ import java.util.LinkedHashSet;
 @EnableRabbit
 @ComponentScan("com.my")
 //监控
-@EnableAdminServer
+//@EnableAdminServer
 @EnableAsync
 public class AdminApplication {
     public static void main(String[] args){
